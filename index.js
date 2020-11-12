@@ -27,7 +27,8 @@ app.use(
 // routes
 const {
     ProjectRoutes,
-    ForgeRoutes
+    ForgeRoutes,
+    TaskRoutes
 } = require('./src/routes/index.routes');
 
 app.get('/', (req, res, next) => {
@@ -37,6 +38,7 @@ app.get('/', (req, res, next) => {
 });
 app.use('/project', ProjectRoutes);
 app.use('/forge', ForgeRoutes);
+app.use('/task', TaskRoutes);
 
 //start the server
 const server = app.listen(app.get("port"), (req, res) => {

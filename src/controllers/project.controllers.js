@@ -8,7 +8,7 @@ module.exports = {
     // GET
     getProjects: async (req, res, next) => {
         try {
-            const projects = await pool.query("SELECT * FROM project ")
+            const projects = await pool.query("SELECT * FROM project")
             return res.status(200).json(projects);
         } catch (error) {
             next(error)
@@ -30,12 +30,16 @@ module.exports = {
     // POST
     postProject: async (req, res, next) => {
         const {
-            title
+            name,
+            image_url
         } = req.body;
 
         try {
-            const newProject = await pool.query(`INSERT INTO project SET ?`, [title]);
-            return res.status(201).send(newProject);
+            await pool.query(`INSERT INTO project SET ?`, [{
+                name,
+                image_url
+            }]);
+            return res.status(201).json({serverMessage : "Project created"});
         } catch (error) {
             next(error);
             console.log(error);
